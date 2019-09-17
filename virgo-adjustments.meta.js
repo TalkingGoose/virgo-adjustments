@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         VIRGO Adjustments
-// @version      1.0
+// @version      1.1
 // @description  Fixes the Virgo interface
 // @author       Paul Watkinson
 // @updateURL    https://raw.githubusercontent.com/TalkingGoose/virgo-adjustments/master/virgo-adjustments.meta.js

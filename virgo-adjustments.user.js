@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         VIRGO Adjustments
-// @version      1.0
+// @version      1.1
 // @description  Fixes the Virgo interface
 // @author       Paul Watkinson
 // @updateURL    https://raw.githubusercontent.com/TalkingGoose/virgo-adjustments/master/virgo-adjustments.meta.js
@@ -144,11 +144,11 @@ const customPanel = `
                     </div>
                     <div class="form-group">
                         <label for="custom-game-content">Content: </label>
-                        <input type="text" class="form-control" id="custom-game-content" name="content" placeholder="localhost/games">
+                        <input type="text" class="form-control" id="custom-game-content" name="content" placeholder="${window.location.hostname}/games">
                     </div>
                     <div class="form-group">
                         <label for="custom-game-logic">Logic: </label>
-                        <input type="text" class="form-control" id="custom-game-logic" name="logic" placeholder="localhost:8125">
+                        <input type="text" class="form-control" id="custom-game-logic" name="logic" placeholder="${window.location.hostname}:8125">
                     </div>
                     <button id="custom-button" type="submit" class="btn btn-primary">Add Server</button>
                 </form>
@@ -277,7 +277,7 @@ function addCustomPanel() {
         const [{value: name}, {value: content}, {value: logic}] = $(this).serializeArray();
 
         // Add the game
-        VIRGO_API.games.add(name, content || 'localhost/games', logic || 'localhost:8125');
+        VIRGO_API.games.add(name, content || `${window.location.hostname}/games`, logic || `${window.location.hostname}:8125`);
     });
 }
 
