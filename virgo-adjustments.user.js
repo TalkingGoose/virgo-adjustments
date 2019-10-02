@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         VIRGO Adjustments
-// @version      1.1
+// @version      1.2
 // @description  Fixes the Virgo interface
 // @author       Paul Watkinson
 // @updateURL    https://raw.githubusercontent.com/TalkingGoose/virgo-adjustments/master/virgo-adjustments.meta.js
@@ -150,7 +150,7 @@ const customPanel = `
                         <label for="custom-game-logic">Logic: </label>
                         <input type="text" class="form-control" id="custom-game-logic" name="logic" placeholder="${window.location.hostname}:8125">
                     </div>
-                    <button id="custom-button" type="submit" class="btn btn-primary">Add Server</button>
+                    <button id="custom-button" type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>
         </div>
@@ -556,6 +556,9 @@ async function setup() {
 
     $('#custom-panel > .panel-heading').click();
 
+    // Add version visibly
+    $('#virgo-version').parent().after(`<div class="small text-center">Virgo Adjustments Version: <strong id="adjustments-version">${GM_info.script.version}</strong></span>`);
+
     // Add history to navigation
     addHistory();
 
@@ -717,3 +720,4 @@ loadModule('JSONFormatter', 'https://cdn.jsdelivr.net/npm/json-formatter-js@2.2.
     observe();
 });
 })();
+
