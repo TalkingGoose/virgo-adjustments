@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         VIRGO Adjustments
-// @version      1.2
+// @version      1.3
 // @description  Fixes the Virgo interface
 // @author       Paul Watkinson
 // @updateURL    https://raw.githubusercontent.com/TalkingGoose/virgo-adjustments/master/virgo-adjustments.meta.js
@@ -274,10 +274,15 @@ function addCustomPanel() {
         event.preventDefault();
 
         // Extract the name and port
-        const [{value: name}, {value: content}, {value: logic}] = $(this).serializeArray();
+        let [{value: name}, {value: content}, {value: logic}] = $(this).serializeArray();
+
+        const {hostname} = window.location;
+
+        content = content || `${hostname}/games`;
+        logic = (/^\d+$/.test(logic) ? `${hostname}:${logic}` : logic || `${hostname}:8125`);
 
         // Add the game
-        VIRGO_API.games.add(name, content || `${window.location.hostname}/games`, logic || `${window.location.hostname}:8125`);
+        VIRGO_API.games.add(name, content, logic);
     });
 }
 
@@ -720,4 +725,3 @@ loadModule('JSONFormatter', 'https://cdn.jsdelivr.net/npm/json-formatter-js@2.2.
     observe();
 });
 })();
-
